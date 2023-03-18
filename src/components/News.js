@@ -333,31 +333,20 @@ export default class News extends Component {
         return (
             <div className="container my-3">
                 <h2>NewsMonkey - Top Headlines</h2>
+
                 <div className="row">
-                    <div className="col-md-4">
-                        <NewsItem
-                            title="akshu"
-                            description="akshu is a software developer"
-                            imageUrl="https://media.cnn.com/api/v1/images/stellar/prod/230317194933-karim-khan-talks-to-clarissa-ward-031723.jpg?c=16x9&q=w_800,c_fill"
-                            newsUrl="todo"
-                        />
-                    </div>
-                    <div className="col-md-4">
-                        <NewsItem
-                            title="akshu"
-                            description="akshu is a software developer"
-                            imageUrl="https://media.cnn.com/api/v1/images/stellar/prod/230317194933-karim-khan-talks-to-clarissa-ward-031723.jpg?c=16x9&q=w_800,c_fill"
-                            newsUrl="todo"
-                        />
-                    </div>
-                    <div className="col-md-4">
-                        <NewsItem
-                            title="akshu"
-                            description="akshu is a software developer"
-                            imageUrl="https://media.cnn.com/api/v1/images/stellar/prod/230317194933-karim-khan-talks-to-clarissa-ward-031723.jpg?c=16x9&q=w_800,c_fill"
-                            newsUrl="todo"
-                        />
-                    </div>
+                    {this.state.articles.map((element) => {
+                        return (
+                            <div className="col-md-4" key={element.url}>
+                                <NewsItem
+                                    title={element.title.slice(0,45)}
+                                    description={element.description.slice(0,88)}
+                                    imageUrl={element.urlToImage}
+                                    newsUrl={element.url}
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         );
