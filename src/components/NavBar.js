@@ -25,7 +25,7 @@ export default class NavBar extends Component {
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
                                     <a
-                                        className="nav-link active"
+                                        className="nav-link "
                                         aria-current="page"
                                         href="/">
                                         Home
@@ -36,6 +36,13 @@ export default class NavBar extends Component {
                                         About
                                     </a>
                                 </li>
+                                <li className="nav-item"> <a href="/" className="nav-link">Business</a></li>
+                                <li className="nav-item"> <a href="/" className="nav-link">Entertainment</a></li>
+                                <li className="nav-item"> <a href="/" className="nav-link">General</a></li>
+                                <li className="nav-item"> <a href="/" className="nav-link">Health</a></li>
+                                <li className="nav-item"> <a href="/" className="nav-link">Science</a></li>
+                                <li className="nav-item"> <a href="/" className="nav-link">Sports</a></li>
+                                <li className="nav-item"> <a href="/" className="nav-link">Technology</a></li>
                             </ul>
                         </div>
                     </div>
