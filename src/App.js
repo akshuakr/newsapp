@@ -6,16 +6,14 @@ import LoadingBar from "react-top-loading-bar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 export default class App extends Component {
-    // apiKey = "45f954a2195941e0aeca09e169c67dc2";
-    apiKey = "84b2994e717c4887b432c080ef02dfa5";
-    // apiKey="46647463e0fe47a89d0e97d6c4439b46"
+    apiKey = process.env.REACT_APP_NEWS_API_KEY;
     pageSize = 6;
     state = {
         progress: 0,
     };
     setProgress = (progress) => {
         this.setState({ progress: progress });
-    }
+    };
 
     render() {
         return (
@@ -24,7 +22,7 @@ export default class App extends Component {
                     <NavBar />
                     <LoadingBar
                         color="#f11946"
-                        height = {2.5}
+                        height={2.5}
                         progress={this.state.progress}
                         // onLoaderFinished={() => setProgress(0)}
                     />

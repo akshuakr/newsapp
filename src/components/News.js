@@ -44,12 +44,15 @@ export default class News extends Component {
         let data = await fetch(url);
         this.props.setProgress(40);
         let parsedData = await data.json();
+        // console.log(parsedData);
         this.props.setProgress(70);
         this.setState({
             articles: parsedData.articles,
-            totalResults: parsedData.totalResults,
+            totalResults: Number(parsedData.totalResults),
             loading: false,
         });
+        // console.log('a' + this.state.totalResults);
+        // console.log(url);
         this.props.setProgress(100);
     }
 
@@ -136,7 +139,7 @@ export default class News extends Component {
                     hasMore={
                         this.state.articles.length !== this.state.totalResults
                     }
-                    loader={<Spinner />}>
+                    loader={ <Spinner />}>
                     <div className="container">
                         <div className="row">
                             {this.state.articles.map((element) => {
