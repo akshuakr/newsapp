@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 export default class News extends Component {
-
     static defaultProps = {
-        country : 'in',
-        pageSize : 8,
-        category : 'general'
-    }
+        country: "in",
+        pageSize: 8,
+        category: "general",
+    };
 
     static propTypes = {
         country: PropTypes.string,
         pageSize: PropTypes.number,
         category: PropTypes.string,
-    }
+    };
 
     constructor() {
         super();
@@ -28,7 +27,7 @@ export default class News extends Component {
 
     async componentDidMount() {
         let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=1&pageSize=${this.props.pageSize}`;
-        this.setState({loading: true})
+        this.setState({ loading: true });
         let data = await fetch(url);
         let parsedData = await data.json();
         this.setState({
@@ -39,10 +38,12 @@ export default class News extends Component {
     }
 
     handlePrevClick = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${
+        let url = `https://newsapi.org/v2/top-headlines?country=${
+            this.props.country
+        }&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${
             this.state.page - 1
         }&pageSize=${this.props.pageSize}`;
-        this.setState({laoding: true})
+        this.setState({ laoding: true });
         let data = await fetch(url);
         let parsedData = await data.json();
         this.setState({
@@ -57,10 +58,12 @@ export default class News extends Component {
             this.state.page + 1 <=
             Math.ceil(this.state.totalResults / this.props.pageSize)
         ) {
-            let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${
-                this.state.page + 1
-            }&pageSize=${this.props.pageSize}`;
-            this.setState({loading : true})
+            let url = `https://newsapi.org/v2/top-headlines?country=${
+                this.props.country
+            }&category=${this.props.category}&apiKey=${
+                this.props.apiKey
+            }&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+            this.setState({ loading: true });
             let data = await fetch(url);
             let parsedData = await data.json();
             this.setState({
@@ -99,6 +102,9 @@ export default class News extends Component {
                                                 : "https://digitalfinger.id/wp-content/uploads/2019/12/no-image-available-icon-6-300x188.png.webp"
                                         }
                                         newsUrl={element.url}
+                                        author = {element.author ? element.author : "Unknown"}
+                                        date = {new Date(element.publishedAt).toLocaleString()}
+                                        newsSource = {element.source.name}
                                     />
                                 </div>
                             );
