@@ -9,8 +9,8 @@ import {
 } from "react-router-dom";
 
 export default class App extends Component {
-    apiKey = "45f954a2195941e0aeca09e169c67dc2";
-    // apiKey="84b2994e717c4887b432c080ef02dfa5"
+    // apiKey = "45f954a2195941e0aeca09e169c67dc2";
+    apiKey="84b2994e717c4887b432c080ef02dfa5"
     // apiKey="46647463e0fe47a89d0e97d6c4439b46"
     pageSize = 6;
 

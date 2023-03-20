@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 import PropTypes from "prop-types";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default class News extends Component {
     static defaultProps = {
@@ -16,17 +17,27 @@ export default class News extends Component {
         category: PropTypes.string,
     };
 
-    constructor() {
-        super();
+    handleSentClick = (text) => {
+        let p1 = text.substring(0, 1).toUpperCase();
+        let p2 = text.substring(1, text.length).toLowerCase();
+        return p1 + p2;
+    };
+
+    constructor(props) {
+        super(props);
         this.state = {
             articles: [],
             loading: false,
             page: 1,
+            totalResults: 0,
         };
+        document.title = `${this.handleSentClick(
+            this.props.category
+        )} - NewsMonkey`;
     }
 
-    async updateNews(){
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    async updateNews() {
+        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         this.setState({ loading: true });
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -65,7 +76,7 @@ export default class News extends Component {
         //     loading: false,
         // });
 
-        this.setState({page: this.state.page -1});
+        this.setState({ page: this.state.page - 1 });
         this.updateNews();
     };
 
@@ -93,43 +104,76 @@ export default class News extends Component {
         this.updateNews();
     };
 
+    fetchMoreData = async () => {
+        this.setState({ page: this.state.page + 1 });
+        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        // this.setState({ loading: true });
+        let data = await fetch(url);
+        let parsedData = await data.json();
+        this.setState({
+            articles: this.state.articles.concat(parsedData.articles),
+            totalResults: parsedData.totalResults,
+            // loading: false,
+        });
+    };
+
     render() {
         return (
-            <div className="container my-3">
-                <h2 className="text-center">NewsMonkey - Top Headlines</h2>
+            <>
+                <h2 className="text-center">
+                    NewsMonkey - Top {this.handleSentClick(this.props.category)}{" "}
+                    Headlines
+                </h2>
                 {this.state.loading && <Spinner />}
-                <div className="row">
-                    {!this.state.loading &&
-                        this.state.articles.map((element) => {
-                            return (
-                                <div className="col-md-4" key={element.url}>
-                                    <NewsItem
-                                        title={
-                                            element.title ? element.title : ""
-                                        }
-                                        description={
-                                            element.description
-                                                ? element.description.slice(
-                                                      0,
-                                                      88
-                                                  )
-                                                : ""
-                                        }
-                                        imageUrl={
-                                            element.urlToImage
-                                                ? element.urlToImage
-                                                : "https://digitalfinger.id/wp-content/uploads/2019/12/no-image-available-icon-6-300x188.png.webp"
-                                        }
-                                        newsUrl={element.url}
-                                        author = {element.author ? element.author : "Unknown"}
-                                        date = {new Date(element.publishedAt).toLocaleString()}
-                                        newsSource = {element.source.name}
-                                    />
-                                </div>
-                            );
-                        })}
-                </div>
-                <div className="container d-flex justify-content-between">
+                <InfiniteScroll
+                    dataLength={this.state.articles.length}
+                    next={this.fetchMoreData}
+                    hasMore={
+                        this.state.articles.length !== this.state.totalResults
+                    }
+                    loader={<Spinner />}>
+                    <div className="container">
+                        <div className="row">
+                            {this.state.articles.map((element) => {
+                                return (
+                                    <div className="col-md-4" key={element.url}>
+                                        <NewsItem
+                                            title={
+                                                element.title
+                                                    ? element.title
+                                                    : ""
+                                            }
+                                            description={
+                                                element.description
+                                                    ? element.description.slice(
+                                                          0,
+                                                          88
+                                                      )
+                                                    : ""
+                                            }
+                                            imageUrl={
+                                                element.urlToImage
+                                                    ? element.urlToImage
+                                                    : "https://digitalfinger.id/wp-content/uploads/2019/12/no-image-available-icon-6-300x188.png.webp"
+                                            }
+                                            newsUrl={element.url}
+                                            author={
+                                                element.author
+                                                    ? element.author
+                                                    : "Unknown"
+                                            }
+                                            date={new Date(
+                                                element.publishedAt
+                                            ).toLocaleString()}
+                                            newsSource={element.source.name}
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </InfiniteScroll>
+                {/* <div className="container d-flex justify-content-between">
                     <button
                         type="button"
                         disabled={this.state.page <= 1}
@@ -149,8 +193,8 @@ export default class News extends Component {
                         onClick={this.handleNextClick}>
                         Next &#8680;
                     </button>
-                </div>
-            </div>
+                </div> */}
+            </>
         );
     }
 }
