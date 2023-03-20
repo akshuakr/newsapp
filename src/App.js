@@ -9,8 +9,11 @@ import {
 } from "react-router-dom";
 
 export default class App extends Component {
+    apiKey = "45f954a2195941e0aeca09e169c67dc2";
+    // apiKey="84b2994e717c4887b432c080ef02dfa5"
+    // apiKey="46647463e0fe47a89d0e97d6c4439b46"
+    pageSize = 6;
 
-    
     render() {
         return (
             <div>
@@ -23,13 +26,11 @@ export default class App extends Component {
                             path="/"
                             element={
                                 <News
-                                    pageSize={6}
+                                    pageSize={this.pageSize}
                                     country="in"
                                     category="general"
                                     key="general"
-                                    apiKey="45f954a2195941e0aeca09e169c67dc2" 
-                                    // apiKey="84b2994e717c4887b432c080ef02dfa5"
-                                    // apiKey="46647463e0fe47a89d0e97d6c4439b46"
+                                    apiKey={this.apiKey}
                                 />
                             }></Route>
                         <Route
@@ -37,13 +38,11 @@ export default class App extends Component {
                             path="/science"
                             element={
                                 <News
-                                    pageSize={6}
+                                    pageSize={this.pageSize}
                                     country="in"
                                     category="science"
                                     key="science"
-                                    apiKey="45f954a2195941e0aeca09e169c67dc2"
-                                    // apiKey="84b2994e717c4887b432c080ef02dfa5"
-                                    // apiKey="46647463e0fe47a89d0e97d6c4439b46"
+                                    apiKey={this.apiKey}
                                 />
                             }></Route>
                         <Route
@@ -51,13 +50,11 @@ export default class App extends Component {
                             path="/entertainment"
                             element={
                                 <News
-                                    pageSize={6}
+                                    pageSize={this.pageSize}
                                     country="in"
                                     category="entertainment"
                                     key="entertainment"
-                                    apiKey="45f954a2195941e0aeca09e169c67dc2"
-                                    // apiKey="84b2994e717c4887b432c080ef02dfa5"
-                                    // apiKey="46647463e0fe47a89d0e97d6c4439b46"
+                                    apiKey={this.apiKey}
                                 />
                             }></Route>
                         <Route
@@ -65,13 +62,11 @@ export default class App extends Component {
                             path="/business"
                             element={
                                 <News
-                                    pageSize={6}
+                                    pageSize={this.pageSize}
                                     country="in"
                                     category="business"
                                     key="business"
-                                    apiKey="45f954a2195941e0aeca09e169c67dc2"
-                                    // apiKey="84b2994e717c4887b432c080ef02dfa5"
-                                    // apiKey="46647463e0fe47a89d0e97d6c4439b46"
+                                    apiKey={this.apiKey}
                                 />
                             }></Route>
                         <Route
@@ -79,13 +74,11 @@ export default class App extends Component {
                             path="/health"
                             element={
                                 <News
-                                    pageSize={6}
+                                    pageSize={this.pageSize}
                                     country="in"
                                     category="health"
                                     key="health"
-                                    apiKey="45f954a2195941e0aeca09e169c67dc2"
-                                    // apiKey="84b2994e717c4887b432c080ef02dfa5"
-                                    // apiKey="46647463e0fe47a89d0e97d6c4439
+                                    apiKey={this.apiKey}
                                 />
                             }></Route>
                         <Route
@@ -93,13 +86,11 @@ export default class App extends Component {
                             path="/sports"
                             element={
                                 <News
-                                    pageSize={6}
+                                    pageSize={this.pageSize}
                                     country="in"
                                     category="sports"
                                     key="sports"
-                                    apiKey="45f954a2195941e0aeca09e169c67dc2"
-                                    // apiKey="84b2994e717c4887b432c080ef02dfa5"
-                                    // apiKey="46647463e0fe47a89d0e97d6c4439b46"
+                                    apiKey={this.apiKey}
                                 />
                             }></Route>
                         <Route
@@ -107,13 +98,11 @@ export default class App extends Component {
                             path="/general"
                             element={
                                 <News
-                                    pageSize={6}
+                                    pageSize={this.pageSize}
                                     country="in"
                                     category="general"
                                     key="general"
-                                    apiKey="45f954a2195941e0aeca09e169c67dc2"
-                                    // apiKey="84b2994e717c4887b432c080ef02dfa5"
-                                    // apiKey="46647463e0fe47a89d0e97d6c4439b46"
+                                    apiKey={this.apiKey}
                                 />
                             }></Route>
                         <Route
@@ -121,13 +110,11 @@ export default class App extends Component {
                             path="/technology"
                             element={
                                 <News
-                                    pageSize={6}
+                                    pageSize={this.pageSize}
                                     country="in"
                                     category="technology"
                                     key="technology"
-                                    apiKey="45f954a2195941e0aeca09e169c67dc2"
-                                    // apiKey="84b2994e717c4887b432c080ef02dfa5"
-                                    // apiKey="46647463e0fe47a89d0e97d6c4439b46"
+                                    apiKey={this.apiKey}
                                 />
                             }></Route>
                     </Routes>
